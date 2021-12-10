@@ -5,6 +5,79 @@ var randomNumber = function(min, max) {
     return value;
 }
 
+// MY ATTEMPT AT PSEUDOCODING - Lesson 3
+// refresh game confirm
+// *include in loop after game ends
+
+// store prompt after refresh
+// *use money to refill, upgrade health, and/or leave store
+// *use value to change affected variables
+// *should be included after game refresh prompt
+
+
+// MODULE PSEUDOCODE - Lesson 3
+// WRAP the game logic in a startGame() function
+
+// WHEN the player is defeated or there are no more enemies, call an endGame() function that:
+// *Alerts the player's total stats
+// *Asks the player if they want to play again
+// *If yes, call startGame() to restart the game
+
+// AFTER the player skips or defeats an enemy (and there are still more robots to fight):
+// *Ask the player if they want to "shop"
+// *If no, continue as normal
+// *If yes, call the shop() function
+// *In the shop() function, ask player if they want to "refill" health, "upgrade" attack, or "leave" the shop
+// *If refill, subtract money points from player and increase health
+// *If upgrade, subtract money points from player and increase attack power
+// *If leave, alert goodbye and exit the function
+// *If any other invalid option, call Shop() again
+
+
+var fightOrSkip = function() {
+    // ask player if they'd like to fight or skip using fightOrSkip function
+    var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+    
+    // Enter the conditional recursive function call here!
+    // Conditional Recursive Function Call
+    if (promptFight === "" || promptFight === null) {
+        window.alert("You need to provide a valid answer! Please try again.");
+        return fightOrSkip();
+    }
+
+    // FALSEY VALUE SHORTCUT
+    /************************************************************************************
+     // if the `promptFight` is NOT a valid value, then execute the following statements.
+     if (!promptFight) {
+         window.alert("You need to provide a valid answer! Please try agian.");
+         return fightOrSkip();
+     }
+    ************************************************************************************/ 
+
+    // changing promptFight value to lowercase
+    promptFight = promptFight.toLowerCase();
+
+    // if player picks "skip" confirm and then stop the loop
+    /*|| promptFight === "SKIP"*///was previously a condition inside if statement
+    if (promptFight === "skip") {
+        // confirm player wants to skip
+        var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+        
+        // if yes (true), leave fight
+        if (confirmSkip) {
+            window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+            // subtract money from playerMoney for skipping, but don't let them go into the negative
+            playerInfo.money = Math.max(0, playerInfo.money - 10);
+
+            //return true if  player wants to leave 
+            return true; 
+
+            //shop();
+        }
+    } 
+    return false;    
+};
+
 // function to set name
 var getPlayerName = function() {
     var name = "";
@@ -76,44 +149,14 @@ var enemyInfo = [
 // var enemy.health = 50;
 // var enemy.attack = 12;
 
-
-// MY ATTEMPT AT PSEUDOCODING - Lesson 3
-// refresh game confirm
-// *include in loop after game ends
-
-// store prompt after refresh
-// *use money to refill, upgrade health, and/or leave store
-// *use value to change affected variables
-// *should be included after game refresh prompt
-
-
-// MODULE PSEUDOCODE - Lesson 3
-// WRAP the game logic in a startGame() function
-
-// WHEN the player is defeated or there are no more enemies, call an endGame() function that:
-// *Alerts the player's total stats
-// *Asks the player if they want to play again
-// *If yes, call startGame() to restart the game
-
-// AFTER the player skips or defeats an enemy (and there are still more robots to fight):
-// *Ask the player if they want to "shop"
-// *If no, continue as normal
-// *If yes, call the shop() function
-// *In the shop() function, ask player if they want to "refill" health, "upgrade" attack, or "leave" the shop
-// *If refill, subtract money points from player and increase health
-// *If upgrade, subtract money points from player and increase attack power
-// *If leave, alert goodbye and exit the function
-// *If any other invalid option, call Shop() again
-
-
-
+// fight function (now with parameter for enemy's object holding name, health, and attack values)
 var fight = function(enemy) {
     // console.log(enemy);
 
     //repeat and execute as long as the enemy-robot is alive
     while(playerInfo.health > 0 && enemy.health > 0) {
         // Giving player choice
-        var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' of 'SKIP' to choose.");
+        /* var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' of 'SKIP' to choose.");
 
         //if player picks "skip" confirm and then stop the loop
         if (promptFight === "skip" || promptFight === "SKIP") {
@@ -128,6 +171,10 @@ var fight = function(enemy) {
                 console.log("playerInfo.money = ", playerInfo.money);
                 break;
             }
+        }*/
+        if (fightOrSkip()) {
+            //if true, leave fight by breaking loop
+            break;
         }
 
         // generate random damage value based on player's attack power
