@@ -234,7 +234,7 @@ var shop = function() {
     switch (shopOptionPrompt) {
         case "REFILL": //new case
         case "refill":
-            if (playerInfo.money >= 7) {
+            /*if (playerInfo.money >= 7) {
                 window.alert("Refilling player's health by 20 for 7 dollars.");
   
                 // increase health and decrease money
@@ -243,12 +243,13 @@ var shop = function() {
             }
             else {
                 window.alert("You don't have enough money!");
-            }
+            }*/
+            playerInfo.refillHealth();
             break;
 
         case "UPGRADE": //new case
         case "upgrade":
-            if (playerInfo.money >= 7) {
+            /*if (playerInfo.money >= 7) {
                 window.alert("Upgrading player's attack by 6 for 7 dollars.");
   
                 // increase attack and decrease money
@@ -257,8 +258,8 @@ var shop = function() {
             }
             else {
                 window.alert("You don't have enough money!");
-            }
-            
+            }*/
+            playerInfo.upgradeAttack();
             break;
 
         case "LEAVE": //new case
